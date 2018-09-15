@@ -1,0 +1,17 @@
+{
+  "tests": "./puppeteer_tests/*.journey.js",
+  "timeout": 10000,
+  "output": "./output",
+  "helpers": {
+    "Puppeteer": {
+      "url": "http://localhost:8090",
+      "show": false,
+      "waitForAction": 150,
+      "windowSize": "1440x900"
+    }
+  },
+  "include": {},
+  "bootstrap": false,
+  "mocha": {},
+  "name": "boilerplate"
+}
