@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
@@ -15,6 +14,8 @@ app.use(
 
 app.use(bodyParser.json());
 
+const db = require('./models/index');
+
 app.use(helmet());
 
 app.use('/api/', (res, next) => {
@@ -25,11 +26,9 @@ app.use('/api/', (res, next) => {
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '../dist/index_bundle.js')));
+require('./controllers/user.route')(app);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
-});
+db.sequelize.sync();
 
 const server = app.listen(port, () => {
   const host = server.address().address;
