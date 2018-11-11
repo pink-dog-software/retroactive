@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const { exec, spawn, spawnSync } = require('child_process');
+const { spawnSync } = require('child_process');
 
 const path = './node_modules/.bin/';
 

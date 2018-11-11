@@ -43,10 +43,7 @@ const startDb = () => {
 
 const migrateDB = () => {
   const method = 'node';
-  const arguments = [
-    '~/react-redux-node-mysql/node_modules/.bin/sequelize',
-    'db:migrate'
-  ];
+  const arguments = ['./node_modules/.bin/sequelize', 'db:migrate'];
   const command = `${method} ${arguments.join(' ')}`;
   console.log(`Executing ${command}`);
 

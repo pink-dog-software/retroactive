@@ -50,7 +50,7 @@ const backRunner = (type) => {
   const method = `${path}mocha`;
   const arguments = [
     '--require',
-    'babel-core/register',
+    '@babel/register',
     '--colors',
     '--timeout',
     '5000',
