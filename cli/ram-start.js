@@ -32,44 +32,17 @@ const startBack = () => {
   return spawnSync(method, arguments, { stdio: 'inherit' });
 };
 
-const startDb = () => {
-  const method = 'docker';
-  const arguments = ['start', 'mysql1'];
-  const command = `${method} ${arguments.join(' ')}`;
-  console.log(`Executing ${command}`);
-
-  return spawnSync(method, arguments, { stdio: 'inherit' });
-};
-
-const migrateDB = () => {
-  const method = 'node';
-  const arguments = ['./node_modules/.bin/sequelize', 'db:migrate'];
-  const command = `${method} ${arguments.join(' ')}`;
-  console.log(`Executing ${command}`);
-
-  return spawnSync(method, arguments, { stdio: 'inherit' });
-};
-
-const dbWait = () => {
-  const method = 'sleep';
-  const arguments = ['3'];
-  const command = `${method} ${arguments.join(' ')}`;
-  console.log(`Executing ${command}`);
-
-  return spawnSync(method, arguments, { stdio: 'inherit' });
-};
-
 const openAll = () => {
   const method = `gnome-terminal`;
   const arguments = [
     `--tab`,
     '--title',
-    'Boilerplate Backend',
+    'Retroactive Server',
     `-e`,
-    'sh -c "docker start mysql1; sleep 3; node ~/react-redux-node-mysql/node_modules/.bin/sequelize db:migrate; node ./backend/app.js; exec bash"',
+    'sh -c "node ./backend/app.js; exec bash"',
     '--tab',
     '--title',
-    'Boilerplate Frontend',
+    'Retroactive Src',
     `-e`,
     'sh -c "./node_modules/.bin/webpack-dev-server --mode development --open --hot --port 8080; exec bash";'
   ];
@@ -103,18 +76,8 @@ program
   });
 
 program
-  .command('database')
-  .alias('db')
-  .description('Starts the database')
-  .action(() => {
-    runner(startDb());
-    runner(dbWait());
-    runner(migrateDB());
-  });
-
-program
   .command('all')
-  .description('Starts the boilerplate')
+  .description('Starts Retroactive')
   .action(() => {
     runner(openAll());
   });

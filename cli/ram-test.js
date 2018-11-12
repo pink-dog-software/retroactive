@@ -5,11 +5,11 @@ const { exec, spawn, spawnSync } = require('child_process');
 
 const path = './node_modules/.bin/';
 
-program.description('Automated test scripts for Boilerplate');
+program.description('Automated test scripts for Retroactive');
 
 const testDirectories = {
-  frontend: './frontend/**/*.spec.js',
-  backend: './backend/**/*.integration.spec.js',
+  src: './src/**/*.spec.js',
+  server: '',
   lint: './**/*.js'
 };
 
@@ -34,7 +34,7 @@ const unitRunner = (type) => {
     '--require',
     '@babel/register',
     '--require',
-    './frontend/pre-processor.js',
+    './src/pre-processor.js',
     '--colors',
     '--timeout',
     '5000',
@@ -99,7 +99,7 @@ program
   .alias('fe')
   .description('unit test runner for Front End')
   .action(() => {
-    jobRunner(unitRunner('frontend'));
+    jobRunner(unitRunner('src'));
   });
 
 program
@@ -107,7 +107,7 @@ program
   .alias('be')
   .description('unit test runner for Back End')
   .action(() => {
-    jobRunner(backRunner('backend'));
+    jobRunner(backRunner('server'));
   });
 
 program
@@ -139,9 +139,8 @@ program
   .description('runs all the tests')
   .action(() => {
     stopFrontJourney();
-    jobRunner(unitRunner('frontend'));
+    jobRunner(unitRunner('src'));
     jobRunner(linter());
-    jobRunner(backRunner('backend'));
     startFrontJourney();
     jobRunner(journeyRunner());
     stopFrontJourney();

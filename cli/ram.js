@@ -3,9 +3,7 @@
 
 const program = require('commander');
 
-program.command('docker', 'script to access docker containers');
-
-program.command('start', 'start up scripts for boilerplate project');
+program.command('start', 'start up scripts for Retroactive');
 
 program.command('test', 'scripts for running automated tests');
 
