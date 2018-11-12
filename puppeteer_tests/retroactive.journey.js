@@ -1,7 +1,7 @@
-Feature('Retroactive');
+Feature('Retroactive')
 
-Scenario('Retroactive', async (I) => {
-  await I.amOnPage('');
+Scenario('Retroactive', async I => {
+  await I.amOnPage('')
 
-  I.see('Hello World');
-});
+  I.see('Retroactive')
+})
