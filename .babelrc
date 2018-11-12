@@ -1,7 +1,7 @@
 {
   "presets": ["@babel/env", "@babel/react"],
   "plugins": [
-    "transform-object-rest-spread",
+    "@babel/plugin-proposal-object-rest-spread",
     "@babel/transform-runtime",
     "babel-plugin-styled-components"
   ]

@@ -1,21 +1,21 @@
 {
-  "name": "react-redux-node-mysql",
+  "name": "retroactive",
   "version": "0.0.1",
   "description": "boilerplate",
-  "main": "webpack.config.js",
+  "main": "./server/app.js",
   "bin": {
     "ram": "./cli/ram.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grahamlangford/react-redux-node-mysql.git"
+    "url": "git+https://github.com/pink-dog-software/retroactive.git"
   },
-  "author": "",
+  "author": "Graham Langford",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/grahamlangford/react-redux-node-mysql/issues"
+    "url": "https://github.com/pink-dog-software/retroactive/issues"
   },
-  "homepage": "https://github.com/grahamlangford/react-redux-node-mysql#readme",
+  "homepage": "https://github.com/pink-dog-software/retroactive#readme",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "@babel/runtime": "^7.0.0",
@@ -24,7 +24,6 @@
     "express": "^4.16.3",
     "helmet": "^3.13.0",
     "moment": "^2.22.2",
-    "mysql2": "^1.6.1",
     "prop-types": "^15.6.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
@@ -32,13 +31,12 @@
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^4.38.1",
-    "sequelize-cli": "^4.1.1",
     "shortid": "^2.2.13",
     "styled-components": "^3.4.6"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
@@ -46,7 +44,6 @@
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
     "babel-plugin-styled-components": "^1.7.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chai": "^4.1.2",
     "codeceptjs-puppeteer": "^1.3.0",
     "commander": "^2.18.0",

@@ -13,7 +13,7 @@ const portSlayer = (port) => {
 };
 
 const ramKiller = () => {
-  const command = `kill $(ps aux | grep '[.]/node_modules/.bin/webpack-dev-server --mode development --open --hot --port 8080' | awk '{print $2}'); kill $(ps aux | grep '[n]ode ./backend/app.js' | awk '{print $2}'); docker stop mysql1`;
+  const command = `kill $(ps aux | grep '[.]/node_modules/.bin/webpack-dev-server --mode development --open --hot --port 8080' | awk '{print $2}'); kill $(ps aux | grep '[n]ode ./server/app.js' | awk '{print $2}'); docker stop mysql1`;
   console.log(`Executing ${command}`);
 
   return exec(command, { stdio: 'inherit' });

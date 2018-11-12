@@ -25,7 +25,7 @@ const startFront = () => {
 
 const startBack = () => {
   const method = 'node';
-  const arguments = ['./backend/app.js'];
+  const arguments = ['./server/app.js'];
   const command = `${method} ${arguments.join(' ')}`;
   console.log(`Executing ${command}`);
 
@@ -39,7 +39,7 @@ const openAll = () => {
     '--title',
     'Retroactive Server',
     `-e`,
-    'sh -c "node ./backend/app.js; exec bash"',
+    'sh -c "node ./server/app.js; exec bash"',
     '--tab',
     '--title',
     'Retroactive Src',
