@@ -3,9 +3,15 @@ const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const { port, dbUri, seed } = require('./config/config')
+const api = require('./api/api')
+
+mongoose.connect(dbUri)
+
+if (seed) require('./util/seed')
 
 const app = express()
-const port = process.env.PORT || 3000
 
 app.use(
   bodyParser.urlencoded({
@@ -18,6 +24,8 @@ app.use(bodyParser.json())
 app.use(helmet())
 
 app.use(cors())
+
+app.use('/api', api)
 
 const server = app.listen(port, () => {
   const host = server.address().address
