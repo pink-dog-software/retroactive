@@ -16,9 +16,6 @@ const styles = theme => ({
     alignItems: 'start',
     justifyContent: 'space-between'
   },
-  button: {
-    color: theme.palette.text.secondary
-  },
   title: {
     fontSize: 18
   },
@@ -37,18 +34,12 @@ const RetroCard = ({ classes, backgroundColor, content }) => {
   return (
     <Card className={classes.card} style={{ backgroundColor }}>
       <CardContent className={classes.content}>
-        <Typography variant="body1" color="textSecondary">
-          {text}
-        </Typography>
+        <Typography variant="body1">{text}</Typography>
       </CardContent>
       <CardActions>
         <Button className={classes.button}>
           <ThumbUpIcon className={classes.icon} />
-          <Typography
-            variant="body2"
-            className={classes.likes}
-            color="textSecondary"
-          >
+          <Typography variant="body2" className={classes.likes}>
             {likes}
           </Typography>
         </Button>

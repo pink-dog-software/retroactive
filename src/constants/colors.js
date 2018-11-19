@@ -1,13 +1,13 @@
 export default {
   primary: '#668F80',
   primaryDark: '#089BA3',
-  secondary: '#D1C488',
-  secondaryDark: '#C6B675',
-  tertiary: '#823B09',
-  tertiaryDark: '#6F2D06',
-  textPrimary: '#000',
-  textSecondary: '#FCEFEF',
+  cream: '#D1C488',
+  creamDark: '#C6B675',
+  textPrimary: '#FCEFEF',
+  paleGreenLight: '#7CD7BD',
   paleGreen: '#44c6a0',
+  paleGreenDark: '#35B98E',
   darkBrown: '#2E282A',
-  salmon: '#CD5334'
+  salmon: '#CD5334',
+  salmonDark: '#C14227'
 }

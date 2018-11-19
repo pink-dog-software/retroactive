@@ -7,7 +7,7 @@ import AppBar from './Atoms/AppBar/AppBar'
 import Board from './Pages/Board/Board'
 import colors from './constants/colors'
 
-const { primary, secondary, textPrimary, textSecondary, darkBrown } = colors
+const { primary, textPrimary, darkBrown } = colors
 
 const theme = createMuiTheme({
   palette: {
@@ -15,11 +15,11 @@ const theme = createMuiTheme({
       main: primary
     },
     secondary: {
-      main: secondary
+      main: '#000'
     },
     text: {
       primary: textPrimary,
-      secondary: textSecondary
+      secondary: darkBrown
     },
     background: {
       default: darkBrown

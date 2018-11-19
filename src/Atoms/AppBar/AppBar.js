@@ -17,9 +17,7 @@ const AppHeader = ({ classes, title }) => {
   return (
     <AppBar className={classes.appBar} position="sticky">
       <Toolbar>
-        <Typography variant="h5" color="textSecondary">
-          {title}
-        </Typography>
+        <Typography variant="h5">{title}</Typography>
       </Toolbar>
     </AppBar>
   )

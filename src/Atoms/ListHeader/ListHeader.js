@@ -21,9 +21,7 @@ const ListHeader = ({ classes, backgroundColor, title }) => {
   return (
     <Card className={classes.title} style={{ backgroundColor }}>
       <CardContent className={classes.content}>
-        <Typography variant="title" color="textSecondary">
-          {title}
-        </Typography>
+        <Typography variant="title">{title}</Typography>
       </CardContent>
     </Card>
   )

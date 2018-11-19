@@ -63,12 +63,18 @@ const backRunner = type => {
 }
 
 const startFrontJourney = () => {
-  const method = `${path}webpack-dev-server`
-  const arguments = ['--mode', 'development', '--port', '8090']
-  const command = `${method} ${arguments.join(' ')}`
+  const method = `gnome-terminal`
+  const arguments = [
+    '--tab',
+    '--title',
+    'Retro Journeys',
+    `-e`,
+    'sh -c "./node_modules/.bin/webpack-dev-server --mode development --config ./webpack/webpack.test.config.js --port 8090; exec bash";'
+  ]
+  const command = `${method} ${arguments.join(` `)}`
   console.log(`Executing ${command}`)
 
-  return spawn(method, arguments, { stdio: 'ignore', detatched: true })
+  return spawnSync(method, arguments)
 }
 
 const stopFrontJourney = () => {
