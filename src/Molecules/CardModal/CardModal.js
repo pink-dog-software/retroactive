@@ -1,73 +1,39 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
+
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
 import TextField from '@material-ui/core/TextField'
-import colors from '../../constants/colors'
+import Close from '@material-ui/icons/Close'
 
-const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    boxShadow: theme.shadows[5],
-    margin: '4% 7% 7% 7%',
-    width: '86%',
-    height: '89%',
-    padding: theme.spacing.unit * 4,
-    borderRadius: '4px'
-  },
-  label: {
-    margin: theme.spacing.unit
-  },
-  text: {
-    margin: theme.spacing.unit,
-    backgroundColor: colors.paleGreenLight,
-    borderRadius: '4px',
-    width: `calc(100% - ${theme.spacing.unit * 2}px)`
-  },
-  cssOutlinedInput: {
-    '&$cssFocused $notchedOutline': {
-      borderColor: `${colors.paleGreenDark} !important`,
-      borderWidth: '2px'
-    },
-    color: theme.palette.text.secondary
-  },
-  cssFocused: {},
-  notchedOutline: {
-    borderWidth: '0px'
-  }
-})
+import IconButton from '../../Atoms/Buttons/IconButton'
+import styles, { getColumnClasses } from './CardModal.styles'
 
 class CardModal extends Component {
   constructor(props) {
     super(props)
 
-    const { text, likes } = this.props
+    const { content } = this.props
 
     this.state = {
-      text,
-      likes
+      text: content.text,
+      likes: content.likes
     }
   }
 
   render() {
-    const { id, classes, open, toggleCardModal, column } = this.props
+    const {
+      id,
+      classes,
+      open,
+      toggleCardModal,
+      content: { column }
+    } = this.props
     const { text, likes } = this.state
-    let backgroundColor
 
-    switch (column) {
-      case 0:
-        backgroundColor = colors.paleGreen
-        break
-      case 1:
-        backgroundColor = colors.cream
-        break
-      case 2:
-        backgroundColor = colors.salmon
-        break
-      default:
-        backgroundColor = colors.primary
-    }
+    const columnClasses = getColumnClasses(column, classes)
 
     return (
       <Modal
@@ -76,14 +42,18 @@ class CardModal extends Component {
         aria-describedby="simple-modal-description"
         open={open}
         onClose={toggleCardModal}
+        onBackdropClick={toggleCardModal}
       >
-        <div className={classes.paper} style={{ backgroundColor }}>
+        <div className={classNames(classes.paper, columnClasses.paper)}>
+          <IconButton onClick={toggleCardModal} className={classes.closeButton}>
+            <Close style={{ height: '32', width: '32' }} />
+          </IconButton>
           <Typography className={classes.label} variant="subtitle1" id="likes">
             Likes: {likes}
           </Typography>
           <TextField
             id="outlined-full-width"
-            className={classes.text}
+            className={classNames(classes.text, columnClasses.textfield)}
             multiline
             rows="4"
             margin="normal"
@@ -91,7 +61,10 @@ class CardModal extends Component {
             value={text}
             InputProps={{
               classes: {
-                root: classes.cssOutlinedInput,
+                root: classNames(
+                  classes.cssOutlinedInput,
+                  columnClasses.outline
+                ),
                 focused: classes.cssFocused,
                 notchedOutline: classes.notchedOutline
               }
@@ -105,17 +78,22 @@ class CardModal extends Component {
 
 CardModal.propTypes = {
   id: PropTypes.string.isRequired,
-  text: PropTypes.string,
-  likes: PropTypes.number,
+  content: PropTypes.shape({
+    likes: PropTypes.number,
+    text: PropTypes.string,
+    column: PropTypes.number
+  }),
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
-  toggleCardModal: PropTypes.func.isRequired,
-  column: PropTypes.number.isRequired
+  toggleCardModal: PropTypes.func.isRequired
 }
 
 CardModal.defaultProps = {
-  text: '',
-  likes: 0
+  content: {
+    text: '',
+    likes: 0,
+    column: 0
+  }
 }
 
 export default withStyles(styles)(CardModal)

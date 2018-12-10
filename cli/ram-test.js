@@ -8,7 +8,7 @@ const path = './node_modules/.bin/'
 program.description('Automated test scripts for Retroactive')
 
 const testDirectories = {
-  src: './src/**/*.spec.js',
+  src: './tests/src/**/*.spec.js',
   server: './tests/server/**/*.spec.js',
   lint: './**/*.js'
 }
