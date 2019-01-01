@@ -34,6 +34,15 @@ const startBack = () => {
   return spawnSync(method, arguments, { stdio: 'inherit' })
 }
 
+const startMongo = () => {
+  const method = 'docker'
+  const arguments = ['container', 'start', 'retrodb']
+  const command = `${method} ${arguments.join(' ')}`
+  console.log(`Executing ${command}`)
+
+  return spawnSync(method, arguments, { stdio: 'inherit' })
+}
+
 const openAll = () => {
   const method = `gnome-terminal`
   const arguments = [
@@ -41,7 +50,7 @@ const openAll = () => {
     '--title',
     'Retroactive Server',
     `-e`,
-    'sh -c "node ./server/app.js; exec bash"',
+    'sh -c "docker container start retrodb; sleep 3; node ./server/app.js; exec bash"',
     '--tab',
     '--title',
     'Retroactive Src',
@@ -75,6 +84,14 @@ program
   .description('Starts the backend')
   .action(() => {
     runner(startBack())
+  })
+
+program
+  .command('mongo')
+  .alias('db')
+  .description('Starts the mongo database')
+  .action(() => {
+    runner(startMongo())
   })
 
 program
