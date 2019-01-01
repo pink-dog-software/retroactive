@@ -9,9 +9,10 @@ import TextField from '@material-ui/core/TextField'
 import Close from '@material-ui/icons/Close'
 
 import IconButton from '../../Atoms/Buttons/IconButton'
+import Button from '../../Atoms/Buttons/Button'
 import styles, { getColumnClasses } from './CardModal.styles'
 
-class CardModal extends Component {
+export class CardModal extends Component {
   constructor(props) {
     super(props)
 
@@ -21,7 +22,18 @@ class CardModal extends Component {
       text: content.text,
       likes: content.likes
     }
+
+    this.handleFormChange = this.handleFormChange.bind(this)
+    this.saveText = this.saveText.bind(this)
   }
+
+  handleFormChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  saveText() {}
 
   render() {
     const {
@@ -29,7 +41,9 @@ class CardModal extends Component {
       classes,
       open,
       toggleCardModal,
-      content: { column }
+      content: { column },
+      content,
+      updateCard
     } = this.props
     const { text, likes } = this.state
 
@@ -53,12 +67,14 @@ class CardModal extends Component {
           </Typography>
           <TextField
             id="outlined-full-width"
+            name="text"
             className={classNames(classes.text, columnClasses.textfield)}
             multiline
             rows="4"
             margin="normal"
             variant="outlined"
             value={text}
+            onChange={this.handleFormChange}
             InputProps={{
               classes: {
                 root: classNames(
@@ -70,6 +86,12 @@ class CardModal extends Component {
               }
             }}
           />
+          <Button
+            className={classes.saveTextButton}
+            onClick={() => updateCard({ ...content, text })}
+          >
+            Save
+          </Button>
         </div>
       </Modal>
     )
@@ -85,7 +107,8 @@ CardModal.propTypes = {
   }),
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
-  toggleCardModal: PropTypes.func.isRequired
+  toggleCardModal: PropTypes.func.isRequired,
+  updateCard: PropTypes.func.isRequired
 }
 
 CardModal.defaultProps = {

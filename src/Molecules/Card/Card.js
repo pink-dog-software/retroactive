@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import ThumbUpIcon from '@material-ui/icons/ThumbUpOutlined'
 
-import CardModal from '../CardModal/CardModal'
+import ConnectedCardModal from '../CardModal/ConnectedCardModal'
 
 const styles = theme => ({
   card: {
@@ -31,7 +31,7 @@ const styles = theme => ({
   }
 })
 
-class RetroCard extends Component {
+export class RetroCard extends Component {
   constructor(props) {
     super(props)
 
@@ -69,7 +69,7 @@ class RetroCard extends Component {
             </Button>
           </CardActions>
         </Card>
-        <CardModal
+        <ConnectedCardModal
           id="modal"
           content={content}
           open={open}

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios'
 import ApiUrl from '../controllers/api.config'
 import { cardConstants } from './actions.constants'
@@ -9,7 +10,21 @@ export const getSuccess = payload => {
   }
 }
 
-export const getFailure = payload => {
+export const postSuccess = payload => {
+  return {
+    type: cardConstants.POST_CARD,
+    payload
+  }
+}
+
+export const putSuccess = payload => {
+  return {
+    type: cardConstants.PUT_CARD,
+    payload
+  }
+}
+
+export const failure = payload => {
   return {
     type: cardConstants.ERROR,
     payload
@@ -23,5 +38,25 @@ export const getCards = () => {
       .then(response => {
         dispatch(getSuccess(response.data))
       })
-      .catch(error => dispatch(getFailure(error)))
+      .catch(error => dispatch(failure(error)))
+}
+
+export const createCard = card => {
+  return dispatch =>
+    axios
+      .post(`${ApiUrl}/api/cards`, { card })
+      .then(response => {
+        dispatch(postSuccess(response.data))
+      })
+      .catch(error => dispatch(failure(error)))
+}
+
+export const updateCard = card => {
+  return dispatch =>
+    axios
+      .put(`${ApiUrl}/api/cards/${card._id}`, { card })
+      .then(response => {
+        dispatch(putSuccess(response.data))
+      })
+      .catch(error => dispatch(failure(error)))
 }

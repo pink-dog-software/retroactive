@@ -4,10 +4,11 @@ import * as actions from '../../../src/actions/card'
 import { getCompleteCard } from '../helpers/card.factory'
 
 describe('card reducer', () => {
+  const dummyCard = getCompleteCard()
   let dummyState
 
   beforeEach(() => {
-    dummyState = { cards: [], error: {} }
+    dummyState = { cards: [dummyCard], error: {} }
   })
 
   it('GET_CARDS', () => {
@@ -18,11 +19,27 @@ describe('card reducer', () => {
     expect(error).to.deep.equal({})
   })
 
+  it('POST_CARD', () => {
+    const card = getCompleteCard()
+    const { cards, error } = cardReducer(dummyState, actions.postSuccess(card))
+
+    expect(cards).to.deep.equal([dummyCard, card])
+    expect(error).to.deep.equal({})
+  })
+
+  it('PUT_CARD', () => {
+    const update = { ...dummyCard, text: 'update' }
+    const { cards, error } = cardReducer(dummyState, actions.putSuccess(update))
+
+    expect(cards).to.deep.equal([update])
+    expect(error).to.deep.equal({})
+  })
+
   it('ERROR', () => {
     const thrown = new Error()
-    const { cards, error } = cardReducer(dummyState, actions.getFailure(thrown))
+    const { cards, error } = cardReducer(dummyState, actions.failure(thrown))
 
-    expect(cards).to.deep.equal([])
+    expect(cards).to.deep.equal([dummyCard])
     expect(error).to.deep.equal(thrown)
   })
 })

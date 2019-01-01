@@ -15,9 +15,27 @@ describe('card action creators', () => {
     expect(payload).to.deep.equal([card1, card2])
   })
 
-  it('getFailure returns { type: ERROR, payload: error }', () => {
+  it('postSuccess returns { type: POST_CARD, payload: card', () => {
+    const card = getCompleteCard()
+
+    const { type, payload } = actions.postSuccess(card)
+
+    expect(type).to.equal(cardConstants.POST_CARD)
+    expect(payload).to.deep.equal(card)
+  })
+
+  it('putSuccess returns { type: PUT_CARD, payload: card', () => {
+    const card = getCompleteCard()
+
+    const { type, payload } = actions.putSuccess(card)
+
+    expect(type).to.equal(cardConstants.PUT_CARD)
+    expect(payload).to.deep.equal(card)
+  })
+
+  it('failure returns { type: ERROR, payload: error }', () => {
     const error = new Error()
-    const { type, payload } = actions.getFailure(error)
+    const { type, payload } = actions.failure(error)
 
     expect(type).to.equal(cardConstants.ERROR)
     expect(payload).to.deep.equal(error)

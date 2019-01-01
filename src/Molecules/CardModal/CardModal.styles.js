@@ -16,6 +16,10 @@ export default theme => ({
     marginTop: `-${theme.spacing.unit * 3}px`,
     marginRight: `-${theme.spacing.unit * 3}px`
   },
+  saveTextButton: {
+    float: 'right',
+    marginRight: theme.spacing.unit
+  },
   label: {
     margin: theme.spacing.unit
   },

@@ -20,7 +20,7 @@ exports.params = (req, res, next, id) => {
 exports.post = (req, res) => {
   const { body } = req
 
-  Card.create(body).then(
+  Card.create(body.card).then(
     card => {
       res.status(200).json(card)
     },
@@ -46,7 +46,7 @@ exports.put = (req, res) => {
 
   const { body } = req
 
-  merge(card, body)
+  merge(card, body.card)
 
   card.save((err, saved) => {
     if (err) {
