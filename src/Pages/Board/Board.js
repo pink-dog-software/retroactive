@@ -10,8 +10,6 @@ import ListHeader from '../../Atoms/ListHeader/ListHeader'
 import colors from '../../constants/colors'
 
 const Board = ({ cards }) => {
-  console.log(cards)
-
   return (
     <Fragment>
       <Grid container>

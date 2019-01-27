@@ -36,5 +36,15 @@ export default createMuiTheme({
   },
   typography: {
     fontSize: 16
+  },
+  props: {
+    MuiButtonBase: {
+      disableRipple: true
+    }
+  },
+  overrides: {
+    MuiAppBar: {
+      backgroundColor: colors.primary
+    }
   }
 })

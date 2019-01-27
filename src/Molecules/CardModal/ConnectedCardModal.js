@@ -1,11 +1,40 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import CardModal from './CardModal'
 import { updateCard } from '../../actions/card'
 
-const Connected = props => {
-  return <CardModal {...props} />
+export class Connected extends Component {
+  constructor(props) {
+    super(props)
+
+    const { content } = this.props
+
+    this.state = {
+      text: content.text,
+      likes: content.likes
+    }
+
+    this.handleFormChange = this.handleFormChange.bind(this)
+  }
+
+  handleFormChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  render() {
+    const { text, likes } = this.state
+    return (
+      <CardModal
+        {...this.props}
+        text={text}
+        likes={likes}
+        handleFormChange={this.handleFormChange}
+      />
+    )
+  }
 }
 
 const mapDispatchToProps = dispatch => {

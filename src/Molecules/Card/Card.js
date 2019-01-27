@@ -11,25 +11,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUpOutlined'
 
 import ConnectedCardModal from '../CardModal/ConnectedCardModal'
 
-const styles = theme => ({
-  card: {
-    minWidth: 275,
-    margin: theme.spacing.unit,
-    display: 'flex',
-    alignItems: 'start',
-    justifyContent: 'space-between'
-  },
-  title: {
-    fontSize: 18
-  },
-  content: {},
-  icon: {
-    fontSize: 18
-  },
-  likes: {
-    paddingLeft: theme.spacing.unit
-  }
-})
+import styles from './Card.styles'
 
 export class RetroCard extends Component {
   constructor(props) {
@@ -65,7 +47,7 @@ export class RetroCard extends Component {
           onDoubleClick={this.toggleCardModal}
           style={{ backgroundColor }}
         >
-          <CardContent className={classes.content}>
+          <CardContent>
             <Typography variant="body1">{text}</Typography>
           </CardContent>
           <CardActions>
