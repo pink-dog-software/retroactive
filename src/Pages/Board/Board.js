@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 
 import CardList from '../../Molecules/CardList/CardList'
-import RetroCard from '../../Molecules/Card/Card'
+import RetroCard from '../../Molecules/Card/ConnectedCard'
 import ListHeader from '../../Atoms/ListHeader/ListHeader'
 import colors from '../../constants/colors'
 

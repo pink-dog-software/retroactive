@@ -14,11 +14,9 @@ export class Connected extends Component {
       text: content.text,
       likes: content.likes
     }
-
-    this.handleFormChange = this.handleFormChange.bind(this)
   }
 
-  handleFormChange(e) {
+  handleFormChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     })

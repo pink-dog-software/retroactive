@@ -4,7 +4,11 @@ export default theme => ({
     margin: theme.spacing.unit,
     display: 'flex',
     alignItems: 'start',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    zIndex: 1
+  },
+  content: {
+    width: '100%'
   },
   title: {
     fontSize: 18
@@ -14,5 +18,12 @@ export default theme => ({
   },
   likes: {
     paddingLeft: theme.spacing.unit
+  },
+  button: {
+    zIndex: 10,
+    marginLeft: '0px'
+  },
+  actions: {
+    paddingLeft: '0px'
   }
 })

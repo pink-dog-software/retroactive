@@ -42,9 +42,5 @@ export default createMuiTheme({
       disableRipple: true
     }
   },
-  overrides: {
-    MuiAppBar: {
-      backgroundColor: colors.primary
-    }
-  }
+  overrides: {}
 })

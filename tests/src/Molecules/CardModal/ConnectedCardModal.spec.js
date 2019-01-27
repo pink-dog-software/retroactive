@@ -1,5 +1,5 @@
-import { React, shallow, expect } from '../helpers/specHelper'
-import { Connected } from '../../../src/Molecules/CardModal/ConnectedCardModal'
+import { React, shallow, expect } from '../../helpers/specHelper'
+import { Connected } from '../../../../src/Molecules/CardModal/ConnectedCardModal'
 
 describe('ConnectedCardModal', () => {
   let wrap

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -13,68 +13,58 @@ import ConnectedCardModal from '../CardModal/ConnectedCardModal'
 
 import styles from './Card.styles'
 
-export class RetroCard extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = { open: false }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.content !== prevState.content) {
-      return {
-        content: nextProps.content
-      }
-    }
-
-    return null
-  }
-
-  toggleCardModal = () => {
-    const { open } = this.state
-    this.setState({ open: !open })
-  }
-
-  render() {
-    const { open, content } = this.state
-    const { classes, backgroundColor } = this.props
-    const { text, likes } = content
-
-    return (
-      <Fragment>
-        <Card
-          className={classes.card}
-          onDoubleClick={this.toggleCardModal}
-          style={{ backgroundColor }}
+export const RetroCard = ({
+  classes,
+  backgroundColor,
+  open,
+  content,
+  content: { text, likes },
+  toggleCardModal,
+  incrementLikes
+}) => {
+  return (
+    <Fragment>
+      <Card className={classes.card} style={{ backgroundColor }}>
+        <CardContent
+          className={classes.content}
+          onDoubleClick={toggleCardModal}
         >
-          <CardContent>
-            <Typography variant="body1">{text}</Typography>
-          </CardContent>
-          <CardActions>
-            <Button className={classes.button}>
-              <ThumbUpIcon className={classes.icon} />
-              <Typography variant="body2" className={classes.likes}>
-                {likes}
-              </Typography>
-            </Button>
-          </CardActions>
-        </Card>
-        <ConnectedCardModal
-          id="modal"
-          content={content}
-          open={open}
-          toggleCardModal={this.toggleCardModal}
-        />
-      </Fragment>
-    )
-  }
+          <Typography variant="body1">{text}</Typography>
+        </CardContent>
+        <CardActions className={classes.actions}>
+          <Button
+            id="card-likes-button"
+            className={classes.button}
+            onClick={() => {
+              incrementLikes(content)
+            }}
+          >
+            <ThumbUpIcon className={classes.icon} />
+            <Typography variant="body2" className={classes.likes}>
+              {likes}
+            </Typography>
+          </Button>
+        </CardActions>
+      </Card>
+      <ConnectedCardModal
+        id="modal"
+        content={content}
+        open={open}
+        toggleCardModal={toggleCardModal}
+      />
+    </Fragment>
+  )
 }
 
 RetroCard.propTypes = {
   classes: PropTypes.object.isRequired,
+  open: PropTypes.bool.isRequired,
   content: PropTypes.shape({
-    text: PropTypes.string
+    text: PropTypes.string,
+    likes: PropTypes.number
   }).isRequired,
+  toggleCardModal: PropTypes.func.isRequired,
+  incrementLikes: PropTypes.func.isRequired,
   backgroundColor: PropTypes.string
 }
 
