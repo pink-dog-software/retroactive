@@ -1,4 +1,4 @@
-import { React, shallow, expect } from '../helpers/specHelper'
+import { React, shallow } from '../helpers/specHelper'
 import { CardModal } from '../../../src/Molecules/CardModal/CardModal'
 
 describe('CardModal', () => {
@@ -9,7 +9,9 @@ describe('CardModal', () => {
       id: 'test-id',
       classes: {},
       open: true,
-      toggleCardModal: () => {}
+      toggleCardModal: () => {},
+      updateCard: () => {},
+      handleFormChange: () => {}
     }
 
     wrap = (props = defaultProps) => shallow(<CardModal {...props} />)
@@ -17,15 +19,5 @@ describe('CardModal', () => {
 
   it('renders', () => {
     wrap()
-  })
-
-  it('handleFormChange updates state', () => {
-    const wrapper = wrap()
-
-    wrapper
-      .instance()
-      .handleFormChange({ target: { name: 'input', value: 'new value' } })
-
-    expect(wrapper.state().input).to.equal('new value')
   })
 })

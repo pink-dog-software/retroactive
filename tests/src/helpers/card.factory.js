@@ -2,7 +2,7 @@ import { Factory } from 'rosie'
 import mongoose from 'mongoose'
 
 Factory.define('completeCard')
-  .attr('_id', () => mongoose.Types.ObjectId())
+  .attr('_id', () => mongoose.Types.ObjectId().toHexString())
   .attr('text', 'dummy text')
   .attr('likes', () => Math.floor(Math.random() * 100))
   .attr('column', () => Math.floor(Math.random() * 2))

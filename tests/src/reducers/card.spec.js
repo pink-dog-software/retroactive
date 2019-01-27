@@ -12,7 +12,7 @@ describe('card reducer', () => {
   })
 
   it('GET_CARDS', () => {
-    const card = getCompleteCard()
+    const card = [getCompleteCard()]
     const { cards, error } = cardReducer(dummyState, actions.getSuccess(card))
 
     expect(cards).to.deep.equal(card)

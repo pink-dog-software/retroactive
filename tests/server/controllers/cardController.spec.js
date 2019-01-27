@@ -30,7 +30,7 @@ describe('cardController', () => {
 
     request(app)
       .post('/api/cards')
-      .send(card)
+      .send({ card })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400, done)
@@ -39,7 +39,7 @@ describe('cardController', () => {
   it('POST - api/cards - responds to a well-formed post with json', done => {
     request(app)
       .post('/api/cards')
-      .send(testCard)
+      .send({ card: testCard })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(res => {
@@ -78,7 +78,7 @@ describe('cardController', () => {
 
     request(app)
       .put(`/api/cards/${_id}`)
-      .send({ text: 'should pass with more likes!', likes: 9000 })
+      .send({ card: { text: 'should pass with more likes!', likes: 9000 } })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(res => {
