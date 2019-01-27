@@ -87,6 +87,7 @@ export class CardModal extends Component {
             }}
           />
           <Button
+            id={`${id}-save-button`}
             className={classes.saveTextButton}
             onClick={() => updateCard({ ...content, text })}
           >

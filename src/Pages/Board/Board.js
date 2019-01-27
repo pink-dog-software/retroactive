@@ -1,12 +1,13 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import Grid from '@material-ui/core/Grid'
 
-import colors from '../../constants/colors'
 import CardList from '../../Molecules/CardList/CardList'
 import RetroCard from '../../Molecules/Card/Card'
 import ListHeader from '../../Atoms/ListHeader/ListHeader'
+import colors from '../../constants/colors'
 
 const Board = ({ cards }) => {
   console.log(cards)
@@ -24,7 +25,8 @@ const Board = ({ cards }) => {
             render={(card, index) => {
               return (
                 <RetroCard
-                  key={`retro-card-0-${index}`}
+                  id={`retro-card-0-${index}`}
+                  key={card._id}
                   backgroundColor={colors.paleGreen}
                   content={card}
                 />
@@ -39,7 +41,8 @@ const Board = ({ cards }) => {
             render={(card, index) => {
               return (
                 <RetroCard
-                  key={`retro-card-1-${index}`}
+                  id={`retro-card-1-${index}`}
+                  key={card._id}
                   backgroundColor={colors.cream}
                   content={card}
                 />
@@ -54,7 +57,8 @@ const Board = ({ cards }) => {
             render={(card, index) => {
               return (
                 <RetroCard
-                  key={`retro-card-2-${index}`}
+                  id={`retro-card-2-${index}`}
+                  key={card._id}
                   backgroundColor={colors.salmon}
                   content={card}
                 />

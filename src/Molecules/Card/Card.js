@@ -35,9 +35,17 @@ export class RetroCard extends Component {
   constructor(props) {
     super(props)
 
-    const { content } = this.props
+    this.state = { open: false }
+  }
 
-    this.state = { open: false, content }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.content !== prevState.content) {
+      return {
+        content: nextProps.content
+      }
+    }
+
+    return null
   }
 
   toggleCardModal = () => {
