@@ -9,3 +9,8 @@ export const cardConstants = {
 export const utilConstants = {
   RESET: 'RESET'
 }
+
+export const cardCreation = {
+  SHOW_ADD: 'SHOW_ADD',
+  HIDE_ADD: 'HIDE_ADD'
+}

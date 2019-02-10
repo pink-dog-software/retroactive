@@ -6,7 +6,7 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import store from '../store'
-import AppBar from '../Atoms/AppBar/AppBar'
+import AppBar from '../Components/AppBar'
 import Board from '../Pages/Board/ConnectedBoard'
 import theme from './App.theme'
 

@@ -15,3 +15,14 @@ export default card => {
     column: card.column
   }
 }
+
+export const newCard = (text, column) => {
+  if (typeof text !== 'string' || typeof column !== 'number') {
+    throw new TypeError('New Card Object missing required fields')
+  }
+  return {
+    text,
+    column,
+    likes: 0
+  }
+}

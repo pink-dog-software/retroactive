@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 import { utilConstants } from '../actions/actions.constants'
 import cardReducer from './card'
+import cardCreationReducer from './cardCreation'
 
 const appReducer = combineReducers({
-  cards: cardReducer
+  cards: cardReducer,
+  cardCreation: cardCreationReducer
 })
 
 export default (state, action) => {

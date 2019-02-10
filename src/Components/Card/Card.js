@@ -14,6 +14,7 @@ import ConnectedCardModal from '../CardModal/ConnectedCardModal'
 import styles from './Card.styles'
 
 export const RetroCard = ({
+  id,
   classes,
   backgroundColor,
   open,
@@ -24,7 +25,7 @@ export const RetroCard = ({
 }) => {
   return (
     <Fragment>
-      <Card className={classes.card} style={{ backgroundColor }}>
+      <Card id={id} className={classes.card} style={{ backgroundColor }}>
         <CardContent
           className={classes.content}
           onDoubleClick={toggleCardModal}
@@ -33,7 +34,7 @@ export const RetroCard = ({
         </CardContent>
         <CardActions className={classes.actions}>
           <Button
-            id="card-likes-button"
+            id={`${id}-likes`}
             className={classes.button}
             onClick={() => {
               incrementLikes(content)
@@ -57,6 +58,7 @@ export const RetroCard = ({
 }
 
 RetroCard.propTypes = {
+  id: PropTypes.string,
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   content: PropTypes.shape({
@@ -69,6 +71,7 @@ RetroCard.propTypes = {
 }
 
 RetroCard.defaultProps = {
+  id: 'retro-card',
   backgroundColor: '#fff'
 }
 
