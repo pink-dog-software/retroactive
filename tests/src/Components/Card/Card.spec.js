@@ -8,6 +8,7 @@ describe('Card', () => {
   beforeEach(() => {
     incrementLikesSpy = sandbox.spy()
     defaultProps = {
+      id: 'test',
       classes: {},
       content: { text: 'test text', likes: 2 },
       open: false,
@@ -24,7 +25,7 @@ describe('Card', () => {
 
   it('clicking the likes button calls incrementLikes with the card content', () => {
     const wrapper = wrap()
-    const likesButton = wrapper.find('#card-likes-button')
+    const likesButton = wrapper.find('#test-likes')
 
     likesButton.prop('onClick')()
     expect(incrementLikesSpy).to.have.been.calledWith(defaultProps.content)
