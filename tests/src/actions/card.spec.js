@@ -24,12 +24,30 @@ describe('card action creators', () => {
     expect(payload).to.deep.equal(card)
   })
 
+  it('externalPost returns { type: EXTERNAL_CARD_ADDED, payload: card', () => {
+    const card = getCompleteCard()
+
+    const { type, payload } = actions.externalPost(card)
+
+    expect(type).to.equal(cardConstants.EXTERNAL_CARD_ADDED)
+    expect(payload).to.deep.equal(card)
+  })
+
   it('putSuccess returns { type: PUT_CARD, payload: card', () => {
     const card = getCompleteCard()
 
     const { type, payload } = actions.putSuccess(card)
 
     expect(type).to.equal(cardConstants.PUT_CARD)
+    expect(payload).to.deep.equal(card)
+  })
+
+  it('externalPut returns { type: EXTERNAL_CARD_UPDATED, payload: card', () => {
+    const card = getCompleteCard()
+
+    const { type, payload } = actions.externalPut(card)
+
+    expect(type).to.equal(cardConstants.EXTERNAL_CARD_UPDATED)
     expect(payload).to.deep.equal(card)
   })
 

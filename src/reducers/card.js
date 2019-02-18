@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import { sendCardToServer, updateCardOnServer } from '../socket'
 import createCard from '../models/card'
 import { cardConstants } from '../actions/actions.constants'
 
@@ -17,9 +18,26 @@ export default (state = initialState, { type, payload }) => {
       }
 
     case cardConstants.POST_CARD:
+      sendCardToServer(payload)
+      return { ...state, cards: [...state.cards, payload], error: {} }
+
+    case cardConstants.EXTERNAL_CARD_ADDED:
       return { ...state, cards: [...state.cards, payload], error: {} }
 
     case cardConstants.PUT_CARD:
+      updateCardOnServer(payload)
+      return {
+        ...state,
+        cards: state.cards.map(card => {
+          if (card._id === payload._id) {
+            return createCard(payload)
+          }
+          return card
+        }),
+        error: {}
+      }
+
+    case cardConstants.EXTERNAL_CARD_UPDATED:
       return {
         ...state,
         cards: state.cards.map(card => {

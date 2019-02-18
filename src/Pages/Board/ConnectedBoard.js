@@ -13,6 +13,7 @@ class Connected extends Component {
 
   render() {
     const { cards } = this.props
+
     return <Board cards={cards} />
   }
 }

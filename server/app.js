@@ -1,10 +1,15 @@
 /* eslint-disable no-console */
 const express = require('express')
 const cors = require('cors')
+const path = require('path')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const http = require('http')
+const socketIO = require('socket.io')
+
 const { port, dbUri, seed } = require('./config/config')
+const socketConstants = require('./util/sockets.constants')
 const api = require('./api/api')
 
 mongoose.connect(dbUri)
@@ -25,12 +30,26 @@ app.use(helmet())
 
 app.use(cors())
 
+app.use('/', express.static(path.join(__dirname, '../dist')))
+
 app.use('/api', api)
 
-const server = app.listen(port, () => {
-  const host = server.address().address
+const server = http.createServer(app)
 
-  console.log(`App listening at http://${host}:${port}`)
+const io = socketIO(server)
+
+io.on('connection', socket => {
+  console.log('======> Connected')
+
+  socket.on(socketConstants.ADD_CARD, card => {
+    socket.broadcast.emit(socketConstants.CARD_ADDED, card)
+  })
+
+  socket.on(socketConstants.UPDATE_CARD, card => {
+    socket.broadcast.emit(socketConstants.CARD_UPDATED, card)
+  })
 })
+
+server.listen(port, () => console.log(`Server listening on port ${port}`))
 
 module.exports = server

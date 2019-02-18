@@ -6,6 +6,8 @@ import React from 'react'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 
+import { socket } from '../../../src/store'
+
 require('isomorphic-fetch')
 
 configure({ adapter: new Adapter() })
@@ -29,6 +31,7 @@ afterEach(() => {
 
 after(() => {
   console.error.restore()
+  socket.close()
 })
 
 export { chai, React, expect, shallow, sandbox, sinon }

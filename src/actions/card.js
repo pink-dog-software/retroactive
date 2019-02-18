@@ -31,6 +31,20 @@ export const failure = payload => {
   }
 }
 
+export const externalPost = payload => {
+  return {
+    type: cardConstants.EXTERNAL_CARD_ADDED,
+    payload
+  }
+}
+
+export const externalPut = payload => {
+  return {
+    type: cardConstants.EXTERNAL_CARD_UPDATED,
+    payload
+  }
+}
+
 export const getCards = () => {
   return dispatch =>
     axios

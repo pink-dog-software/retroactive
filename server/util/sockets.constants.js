@@ -1,0 +1,6 @@
+module.exports = {
+  CARD_ADDED: 'CARD_ADDED',
+  CARD_UPDATED: 'CARD_UPDATED',
+  ADD_CARD: 'ADD_CARD',
+  UPDATE_CARD: 'UPDATE_CARD'
+}
