@@ -1,4 +1,5 @@
 cli
 specHelper.js
 puppeteer_tests
+node_modules
 dist

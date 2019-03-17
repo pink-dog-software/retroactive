@@ -92,7 +92,7 @@ const Board = ({ cards, listsExpanded }) => {
 
 Board.propTypes = {
   cards: PropTypes.array.isRequired,
-  listsExpanded: PropTypes.bool.isRequired
+  listsExpanded: PropTypes.arrayOf(PropTypes.bool).isRequired
 }
 
 export default Board

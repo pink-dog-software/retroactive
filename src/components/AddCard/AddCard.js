@@ -67,6 +67,7 @@ export const AddCard = ({
               handleChange('')
               saveCard(newCard(text, column))
             }}
+            disabled={text.trim() === ''}
             variant="outlined"
           >
             Save

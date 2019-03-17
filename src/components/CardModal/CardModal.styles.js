@@ -7,7 +7,23 @@ export default theme => ({
     height: '89%',
     padding: theme.spacing.unit * 4,
     borderRadius: '4px',
-    outline: 'none'
+    outline: 'none',
+    display: 'flex',
+    flexDirection: 'column',
+    overflowY: 'auto'
+  },
+  timer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  timerButtons: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around'
+  },
+  time: {
+    fontSize: theme.typography.fontSize * 6
   },
   closeButton: {
     float: 'right',
