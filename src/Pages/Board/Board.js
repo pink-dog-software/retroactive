@@ -3,15 +3,16 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 import Grid from '@material-ui/core/Grid'
+import Collapse from '@material-ui/core/Collapse'
 
-import CardList from '../../Components/CardList/CardList'
-import RetroCard from '../../Components/Card/ConnectedCard'
-import ListHeader from '../../Components/ListHeader/ConnectedListHeader'
+import CardList from '../../components/CardList/CardList'
+import RetroCard from '../../components/Card/ConnectedCard'
+import ListHeader from '../../components/ListHeader/ConnectedListHeader'
 
 import colors from '../../constants/colors'
-import AddCard from '../../Components/AddCard/ConnectedAddCard'
+import AddCard from '../../components/AddCard/ConnectedAddCard'
 
-const Board = ({ cards }) => {
+const Board = ({ cards, listsExpanded }) => {
   return (
     <Fragment>
       <Grid container>
@@ -22,19 +23,21 @@ const Board = ({ cards }) => {
             column={0}
           />
           <AddCard column={0} backgroundColor={colors.paleGreenDark} />
-          <CardList
-            cards={cards.filter(card => card.column === 0)}
-            render={(card, index) => {
-              return (
-                <RetroCard
-                  id={`retro-card-0-${index}`}
-                  key={card._id}
-                  backgroundColor={colors.paleGreen}
-                  content={card}
-                />
-              )
-            }}
-          />
+          <Collapse in={listsExpanded[0]}>
+            <CardList
+              cards={cards.filter(card => card.column === 0)}
+              render={(card, index) => {
+                return (
+                  <RetroCard
+                    id={`retro-card-0-${index}`}
+                    key={card._id}
+                    backgroundColor={colors.paleGreen}
+                    content={card}
+                  />
+                )
+              }}
+            />
+          </Collapse>
         </Grid>
         <Grid item xs={12} md={4}>
           <ListHeader
@@ -43,19 +46,21 @@ const Board = ({ cards }) => {
             column={1}
           />
           <AddCard column={1} backgroundColor={colors.creamDark} />
-          <CardList
-            cards={cards.filter(card => card.column === 1)}
-            render={(card, index) => {
-              return (
-                <RetroCard
-                  id={`retro-card-1-${index}`}
-                  key={card._id}
-                  backgroundColor={colors.cream}
-                  content={card}
-                />
-              )
-            }}
-          />
+          <Collapse in={listsExpanded[1]}>
+            <CardList
+              cards={cards.filter(card => card.column === 1)}
+              render={(card, index) => {
+                return (
+                  <RetroCard
+                    id={`retro-card-1-${index}`}
+                    key={card._id}
+                    backgroundColor={colors.cream}
+                    content={card}
+                  />
+                )
+              }}
+            />
+          </Collapse>
         </Grid>
         <Grid item xs={12} md={4}>
           <ListHeader
@@ -64,19 +69,21 @@ const Board = ({ cards }) => {
             column={2}
           />
           <AddCard column={2} backgroundColor={colors.salmonDark} />
-          <CardList
-            cards={cards.filter(card => card.column === 2)}
-            render={(card, index) => {
-              return (
-                <RetroCard
-                  id={`retro-card-2-${index}`}
-                  key={card._id}
-                  backgroundColor={colors.salmon}
-                  content={card}
-                />
-              )
-            }}
-          />
+          <Collapse in={listsExpanded[2]}>
+            <CardList
+              cards={cards.filter(card => card.column === 2)}
+              render={(card, index) => {
+                return (
+                  <RetroCard
+                    id={`retro-card-2-${index}`}
+                    key={card._id}
+                    backgroundColor={colors.salmon}
+                    content={card}
+                  />
+                )
+              }}
+            />
+          </Collapse>
         </Grid>
       </Grid>
     </Fragment>
@@ -84,7 +91,8 @@ const Board = ({ cards }) => {
 }
 
 Board.propTypes = {
-  cards: PropTypes.array.isRequired
+  cards: PropTypes.array.isRequired,
+  listsExpanded: PropTypes.bool.isRequired
 }
 
 export default Board

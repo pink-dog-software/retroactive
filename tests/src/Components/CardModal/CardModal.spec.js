@@ -1,5 +1,5 @@
 import { React, shallow } from '../../helpers/specHelper'
-import { CardModal } from '../../../../src/Components/CardModal/CardModal'
+import { CardModal } from '../../../../src/components/CardModal/CardModal'
 
 describe('CardModal', () => {
   let wrap

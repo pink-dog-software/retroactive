@@ -1,5 +1,5 @@
 import { React, shallow, sandbox, expect } from '../../helpers/specHelper'
-import { RetroCard } from '../../../../src/Components/Card/Card'
+import { RetroCard } from '../../../../src/components/Card/Card'
 
 describe('Card', () => {
   let wrap

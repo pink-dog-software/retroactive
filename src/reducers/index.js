@@ -2,10 +2,12 @@ import { combineReducers } from 'redux'
 import { utilConstants } from '../actions/actions.constants'
 import cardReducer from './card'
 import cardCreationReducer from './cardCreation'
+import toggleListReducer from './toggleList'
 
 const appReducer = combineReducers({
   cards: cardReducer,
-  cardCreation: cardCreationReducer
+  cardCreation: cardCreationReducer,
+  listsExpanded: toggleListReducer
 })
 
 export default (state, action) => {

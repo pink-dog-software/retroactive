@@ -14,7 +14,7 @@ class Connected extends Component {
   render() {
     const { cards } = this.props
 
-    return <Board cards={cards} />
+    return <Board cards={cards} {...this.props} />
   }
 }
 
@@ -25,7 +25,8 @@ Connected.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    cards: state.cards.cards
+    cards: state.cards.cards,
+    listsExpanded: state.listsExpanded
   }
 }
 

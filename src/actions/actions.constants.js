@@ -16,3 +16,8 @@ export const cardCreation = {
   SHOW_ADD: 'SHOW_ADD',
   HIDE_ADD: 'HIDE_ADD'
 }
+
+export const toggleList = {
+  SHOW_LIST: 'SHOW_LIST',
+  HIDE_LIST: 'HIDE_LIST'
+}

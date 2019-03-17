@@ -4,14 +4,24 @@ import { connect } from 'react-redux'
 
 import AddCard from './AddCard'
 import { createCard } from '../../actions/card'
+import { hideCardCreation } from '../../actions/cardCreation'
 
-const ConnectedAddCard = ({ cardCreation, column, saveCard, ...rest }) => {
+const ConnectedAddCard = ({
+  cardCreation,
+  column,
+  saveCard,
+  closeCardCreation,
+  ...rest
+}) => {
   return (
     <AddCard
       {...rest}
       column={column}
       isVisible={cardCreation[column]}
-      saveCard={saveCard}
+      saveCard={card => {
+        saveCard(card)
+        closeCardCreation(column)
+      }}
     />
   )
 }
@@ -24,7 +34,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveCard: card => dispatch(createCard(card))
+    saveCard: card => dispatch(createCard(card)),
+    closeCardCreation: column => dispatch(hideCardCreation(column))
   }
 }
 
