@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -9,7 +10,8 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import ThumbUpIcon from '@material-ui/icons/ThumbUpOutlined'
 
-import ConnectedCardModal from '../CardModal/ConnectedCardModal'
+import CardModal from '../CardModal'
+import { updateCard } from '../../actions/card'
 
 import styles from './Card.styles'
 
@@ -17,18 +19,18 @@ export const RetroCard = ({
   id,
   classes,
   backgroundColor,
-  open,
   content,
   content: { text, likes },
-  toggleCardModal,
   incrementLikes
 }) => {
+  const [open, toggleCardModal] = useState(false)
+
   return (
-    <Fragment>
+    <>
       <Card id={id} className={classes.card} style={{ backgroundColor }}>
         <CardContent
           className={classes.content}
-          onDoubleClick={toggleCardModal}
+          onDoubleClick={() => toggleCardModal(!open)}
         >
           <Typography variant="body1">{text}</Typography>
         </CardContent>
@@ -47,25 +49,31 @@ export const RetroCard = ({
           </Button>
         </CardActions>
       </Card>
-      <ConnectedCardModal
+      <CardModal
         id="modal"
         content={content}
         open={open}
-        toggleCardModal={toggleCardModal}
+        toggleCardModal={() => toggleCardModal(!open)}
       />
-    </Fragment>
+    </>
   )
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    incrementLikes: card => {
+      dispatch(updateCard({ ...card, likes: card.likes + 1 }))
+    }
+  }
 }
 
 RetroCard.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.object.isRequired,
-  open: PropTypes.bool.isRequired,
   content: PropTypes.shape({
     text: PropTypes.string,
     likes: PropTypes.number
   }).isRequired,
-  toggleCardModal: PropTypes.func.isRequired,
   incrementLikes: PropTypes.func.isRequired,
   backgroundColor: PropTypes.string
 }
@@ -75,4 +83,7 @@ RetroCard.defaultProps = {
   backgroundColor: '#fff'
 }
 
-export default withStyles(styles)(RetroCard)
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(RetroCard))

@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 
 import store from '../store'
 import AppBar from '../components/AppBar'
-import Board from '../Pages/Board/ConnectedBoard'
+import Board from '../Pages/Board'
 import theme from './App.theme'
 
 ReactDOM.render(

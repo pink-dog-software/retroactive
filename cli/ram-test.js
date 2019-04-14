@@ -9,6 +9,7 @@ program.description('Automated test scripts for Retroactive')
 
 const testDirectories = {
   src: './tests/src/**/*.spec.js',
+  fe: './src/**/*.spec.js',
   server: './tests/server/**/*.spec.js',
   lint: './**/*.js'
 }
@@ -106,6 +107,7 @@ program
   .description('unit test runner for Front End')
   .action(() => {
     jobRunner(unitRunner('src'))
+    jobRunner(unitRunner('fe'))
   })
 
 program

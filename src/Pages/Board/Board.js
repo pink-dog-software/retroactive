@@ -1,20 +1,25 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Fragment } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Grid from '@material-ui/core/Grid'
 import Collapse from '@material-ui/core/Collapse'
 
+import { getCards } from '../../actions/card'
+
 import CardList from '../../components/CardList/CardList'
-import RetroCard from '../../components/Card/ConnectedCard'
-import ListHeader from '../../components/ListHeader/ConnectedListHeader'
+import RetroCard from '../../components/Card'
+import ListHeader from '../../components/ListHeader'
 
 import colors from '../../constants/colors'
-import AddCard from '../../components/AddCard/ConnectedAddCard'
+import AddCard from '../../components/AddCard'
 
-const Board = ({ cards, listsExpanded }) => {
+const Board = ({ cards, listsExpanded, fetchCards }) => {
+  useEffect(() => fetchCards(), [])
+
   return (
-    <Fragment>
+    <>
       <Grid container>
         <Grid item xs={12} md={4}>
           <ListHeader
@@ -86,13 +91,32 @@ const Board = ({ cards, listsExpanded }) => {
           </Collapse>
         </Grid>
       </Grid>
-    </Fragment>
+    </>
   )
 }
 
-Board.propTypes = {
-  cards: PropTypes.array.isRequired,
-  listsExpanded: PropTypes.bool.isRequired
+const mapStateToProps = state => {
+  return {
+    cards: state.cards.cards,
+    listsExpanded: state.listsExpanded
+  }
 }
 
-export default Board
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchCards: () => {
+      dispatch(getCards())
+    }
+  }
+}
+
+Board.propTypes = {
+  cards: PropTypes.arrayOf(PropTypes.object).isRequired,
+  listsExpanded: PropTypes.arrayOf(PropTypes.bool).isRequired,
+  fetchCards: PropTypes.func.isRequired
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Board)

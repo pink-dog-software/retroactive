@@ -1,5 +1,11 @@
-import { React, shallow, sandbox, expect } from '../../helpers/specHelper'
-import { RetroCard } from '../../../../src/components/Card/Card'
+/* eslint-disable */
+import {
+  React,
+  shallow,
+  sandbox,
+  expect
+} from '../../../tests/src/helpers/specHelper'
+import { RetroCard } from './Card'
 
 describe('Card', () => {
   let wrap
@@ -11,8 +17,6 @@ describe('Card', () => {
       id: 'test',
       classes: {},
       content: { text: 'test text', likes: 2 },
-      open: false,
-      toggleCardModal: () => {},
       incrementLikes: incrementLikesSpy
     }
 
@@ -29,5 +33,13 @@ describe('Card', () => {
 
     likesButton.prop('onClick')()
     expect(incrementLikesSpy).to.have.been.calledWith(defaultProps.content)
+  })
+
+  it('toggleCardModal flips open state', () => {
+    const wrapper = wrap()
+
+    wrapper.instance().toggleCardModal(true)
+
+    expect(wrapper.state().open).to.be.true
   })
 })

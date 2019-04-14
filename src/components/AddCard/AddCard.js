@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -10,17 +11,22 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
+import { createCard } from '../../actions/card'
+import { hideCardCreation } from '../../actions/cardCreation'
 import { newCard } from '../../models/card'
 import styles, { getColumnClasses } from './AddCard.styles'
 
 export const AddCard = ({
   classes,
   backgroundColor,
-  isVisible,
   column,
-  saveCard
+  cardCreation,
+  saveCard,
+  closeCardCreation
 }) => {
   const columnClasses = getColumnClasses(column, classes)
+
+  const isVisible = cardCreation[column]
 
   const [text, handleChange] = useState('')
 
@@ -66,6 +72,7 @@ export const AddCard = ({
             onClick={() => {
               handleChange('')
               saveCard(newCard(text, column))
+              closeCardCreation(column)
             }}
             variant="outlined"
           >
@@ -77,17 +84,33 @@ export const AddCard = ({
   )
 }
 
+const mapStateToProps = state => {
+  return {
+    cardCreation: state.cardCreation
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    saveCard: card => dispatch(createCard(card)),
+    closeCardCreation: column => dispatch(hideCardCreation(column))
+  }
+}
+
 AddCard.propTypes = {
   classes: PropTypes.object.isRequired,
   backgroundColor: PropTypes.string,
-  isVisible: PropTypes.bool,
   column: PropTypes.number.isRequired,
-  saveCard: PropTypes.func.isRequired
+  cardCreation: PropTypes.arrayOf(PropTypes.bool).isRequired,
+  saveCard: PropTypes.func.isRequired,
+  closeCardCreation: PropTypes.func.isRequired
 }
 
 AddCard.defaultProps = {
-  backgroundColor: '#fff',
-  isVisible: false
+  backgroundColor: '#fff'
 }
 
-export default withStyles(styles)(AddCard)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(AddCard))

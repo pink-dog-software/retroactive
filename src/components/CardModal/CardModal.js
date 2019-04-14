@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import classNames from 'classnames'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -10,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Close from '@material-ui/icons/Close'
 import Button from '@material-ui/core/Button'
 
+import { updateCard } from '../../actions/card'
 import styles, { getColumnClasses } from './CardModal.styles'
 
 export const CardModal = ({
@@ -17,14 +19,13 @@ export const CardModal = ({
   classes,
   open,
   toggleCardModal,
-  content: { column },
+  content: { column, text: textProp, likes },
   content,
-  updateCard,
-  text,
-  likes,
-  handleFormChange
+  putCard
 }) => {
   const columnClasses = getColumnClasses(column, classes)
+
+  const [text, setText] = useState(textProp)
 
   return (
     <Modal
@@ -51,7 +52,7 @@ export const CardModal = ({
           margin="normal"
           variant="outlined"
           value={text}
-          onChange={handleFormChange}
+          onChange={e => setText(e.target.value)}
           InputProps={{
             classes: {
               root: classNames(classes.cssOutlinedInput, columnClasses.outline),
@@ -63,7 +64,7 @@ export const CardModal = ({
         <Button
           id={`${id}-save-button`}
           className={classes.saveTextButton}
-          onClick={() => updateCard({ ...content, text })}
+          onClick={() => putCard({ ...content, text })}
         >
           Save
         </Button>
@@ -72,26 +73,36 @@ export const CardModal = ({
   )
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    putCard: card => {
+      dispatch(updateCard(card))
+    }
+  }
+}
+
 CardModal.propTypes = {
   id: PropTypes.string.isRequired,
   content: PropTypes.shape({
-    column: PropTypes.number
+    column: PropTypes.number,
+    likes: PropTypes.number,
+    text: PropTypes.string
   }),
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   toggleCardModal: PropTypes.func.isRequired,
-  updateCard: PropTypes.func.isRequired,
-  handleFormChange: PropTypes.func.isRequired,
-  likes: PropTypes.number,
-  text: PropTypes.string
+  putCard: PropTypes.func.isRequired
 }
 
 CardModal.defaultProps = {
   content: {
-    column: 0
-  },
-  text: '',
-  likes: 0
+    column: 0,
+    text: '',
+    likes: 0
+  }
 }
 
-export default withStyles(styles)(CardModal)
+export default connect(
+  null,
+  mapDispatchToProps
+)(withStyles(styles)(CardModal))
