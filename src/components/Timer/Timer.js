@@ -16,58 +16,30 @@ const formatTime = time => {
   return `${minutes}:${formattedSeconds}`
 }
 
-export const Timer = ({
-  timer: { time: timeProps, running: runningProps },
-  timer
-}) => {
-  const [time, setTime] = useState(timeProps)
-  const [running, setRunning] = useState(runningProps)
-
-  console.log('time: ', time)
-  console.log('timeProps: ', timeProps)
-
-  useEffect(() => {
-    const timeout =
-      running &&
-      setTimeout(() => {
-        setTime(time - 1)
-      }, 1000)
-
-    return () => clearTimeout(timeout)
-  }, [time, running])
-
-  useEffect(() => {
-    setTime(timeProps)
-  }, [timeProps])
-
-  useEffect(() => {
-    setRunning(runningProps)
-  }, [runningProps])
+export const Timer = ({ timer: { time, running }, timer }) => {
+  console.log('timer: ', timer)
+  console.log('timeProps: ', time)
 
   return (
     <div>
       <h3>{formatTime(time)}</h3>
       <Button
         onClick={() => {
-          setRunning(!running)
-          updateTimer({ time, running: !running })
+          updateTimer({ running: !running, id: 0, increment: 0, reset: false })
         }}
       >
         {running ? 'Pause' : 'Start'}
       </Button>
       <Button
         onClick={() => {
-          setTime(time + 60)
-          updateTimer({ time: time + 60, running })
+          updateTimer({ running, id: 0, increment: 60, reset: false })
         }}
       >
         Add Time
       </Button>
       <Button
         onClick={() => {
-          setTime(300)
-          setRunning(false)
-          updateTimer({ time: 300, running: false })
+          updateTimer({ running: false, id: 0, increment: 0, reset: true })
         }}
       >
         Reset

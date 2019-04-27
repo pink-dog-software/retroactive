@@ -50,8 +50,41 @@ io.on('connection', socket => {
   })
 
   socket.on(socketConstants.TICK, timer => {
-    console.log('socket timer')
-    socket.broadcast.emit(socketConstants.TOCK, timer)
+    // socket.broadcast.emit(socketConstants.TOCK, timer)
+    const emit = newTimer => io.emit(socketConstants.TOCK, newTimer)
+
+    const setTimer = (cardId, running, time) => ({
+      id: cardId,
+      running,
+      time
+    })
+
+    let interval
+    let time = 300
+
+    if (timer.running && timer.increment === 0) {
+      console.log('start')
+      interval = setInterval(() => {
+        time -= 1
+        emit(setTimer(timer.id, true, time))
+      }, 1000)
+    } else if (!timer.running && !timer.reset) {
+      console.log('stop')
+
+      clearInterval(interval)
+      emit(setTimer(timer.id, false, time))
+    } else if (timer.increment > 0) {
+      console.log('add')
+
+      time += timer.increment
+      emit(setTimer(timer.id, timer.running, time))
+    } else {
+      console.log('reset')
+
+      time = 300
+      clearInterval(interval)
+      emit(setTimer(timer.id, false, time))
+    }
   })
 })
 
