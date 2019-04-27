@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { sendCardToServer, updateCardOnServer } from '../socket'
+import { sendCardToServer, updateCardOnServer } from '../sockets/card'
 import createCard from '../models/card'
 import { cardConstants } from '../actions/actions.constants'
 

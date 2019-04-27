@@ -21,3 +21,7 @@ export const toggleList = {
   SHOW_LIST: 'SHOW_LIST',
   HIDE_LIST: 'HIDE_LIST'
 }
+
+export const timer = {
+  TICK: 'TICK'
+}

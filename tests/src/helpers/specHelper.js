@@ -6,7 +6,7 @@ import React from 'react'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 
-import { socket } from '../../../src/store'
+import { cardSocket, timerSocket } from '../../../src/store'
 
 require('isomorphic-fetch')
 
@@ -31,7 +31,8 @@ afterEach(() => {
 
 after(() => {
   console.error.restore()
-  socket.close()
+  cardSocket.close()
+  timerSocket.close()
 })
 
 export { chai, React, expect, shallow, sandbox, sinon }

@@ -48,6 +48,11 @@ io.on('connection', socket => {
   socket.on(socketConstants.UPDATE_CARD, card => {
     socket.broadcast.emit(socketConstants.CARD_UPDATED, card)
   })
+
+  socket.on(socketConstants.TICK, timer => {
+    console.log('socket timer')
+    socket.broadcast.emit(socketConstants.TOCK, timer)
+  })
 })
 
 server.listen(port, () => console.log(`Server listening on port ${port}`))

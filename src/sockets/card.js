@@ -1,11 +1,8 @@
-import io from 'socket.io-client'
-import socketActions from '../server/util/sockets.constants'
+import socket from './setup'
+import socketActions from '../../server/util/sockets.constants'
+import { externalPost, externalPut } from '../actions/card'
 
-import { externalPost, externalPut } from './actions/card'
-
-const socket = io('http://localhost:3000')
-
-export const configureSocket = dispatch => {
+export default dispatch => {
   socket.on(socketActions.CARD_ADDED, card => {
     dispatch(externalPost(card))
   })

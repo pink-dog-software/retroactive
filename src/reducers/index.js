@@ -3,11 +3,13 @@ import { utilConstants } from '../actions/actions.constants'
 import cardReducer from './card'
 import cardCreationReducer from './cardCreation'
 import toggleListReducer from './toggleList'
+import timerReducer from './timer'
 
 const appReducer = combineReducers({
   cards: cardReducer,
   cardCreation: cardCreationReducer,
-  listsExpanded: toggleListReducer
+  listsExpanded: toggleListReducer,
+  timer: timerReducer
 })
 
 export default (state, action) => {
